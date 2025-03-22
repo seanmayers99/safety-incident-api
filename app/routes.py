@@ -1,10 +1,12 @@
 from flask import Blueprint, request, jsonify
+from flask_jwt_extended import jwt_required
 from . import db
 from .models import Incident
 
 main = Blueprint('main', __name__)
 
 @main.route('/incidents', methods=['POST'])
+@jwt_required()
 def add_incident():
     data = request.get_json()
     new_incident = Incident(**data)
