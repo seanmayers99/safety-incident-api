@@ -1,10 +1,8 @@
-from app import create_app, db
+from flask import Flask
 
-app = create_app()
+app = Flask(__name__)
 
-with app.app_context():
-    db.create_all()
-
+# 👇 Add this route just after the app is defined
 @app.route("/")
 def home():
     return {
@@ -12,6 +10,6 @@ def home():
         "available_endpoints": ["/register", "/login", "/incidents"]
     }
 
-
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=10000)
+    app.run(host="0.0.0.0", port=5000)
+
